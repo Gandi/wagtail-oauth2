@@ -6,7 +6,7 @@ from wagtail_oauth2.resources import Token
 def test_token_by_authcode(mock_oauth2):
     tokens = Token.by_authcode("codecode")
     assert tokens == {
-        "access_token": "user",
+        "access_token": "mey_authcode",
         "refresh_token": "freshmenthol",
     }
     assert mock_oauth2.api_calls == {

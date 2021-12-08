@@ -3,7 +3,9 @@ import os.path
 from typing import Dict, Any
 
 USERS = {
-
+    "mey_authcode": {
+        "username": "mei",
+    }
 }
 
 def load_userinfo(access_token):
@@ -14,9 +16,6 @@ def load_userinfo(access_token):
     is_superuser fields to register any new user.
     """
     return USERS.get(access_token, {})
-
-
-
 
 
 OAUTH2_VERIFY_CERTIFICATE = False
@@ -53,11 +52,16 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.sessions",
     "wagtail_oauth2",
     "wagtail.admin",
     "wagtail.users",
     "wagtail.core",
     "tests",
+]
+
+MIDDLEWARE = [
+    "django.contrib.sessions.middleware.SessionMiddleware"
 ]
 
 

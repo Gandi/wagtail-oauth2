@@ -39,7 +39,6 @@ class StateError(ValueError):
 
 def get_user_from_userinfo(userinfo):
     """Create or retrieve a user from the wagtail point of view, from the userinfo."""
-
     username = userinfo.get("username")
     user_cls = get_user_model()
     try:
@@ -72,6 +71,8 @@ class Oauth2LoginView(LoginView):
     def add_state(self, request, resp, state):
         """Set the OAuth2.0 state in the cookie."""
         default = "/admin"
+        if getattr(settings, "WAGTAIL_APPEND_SLASH", True):
+            default += "/"
         referrer = request.GET.get("next", self.get_success_url())
         # never use the login form itself as referrer
         if referrer.startswith(reverse("wagtailadmin_login")):

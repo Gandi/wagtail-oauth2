@@ -56,7 +56,7 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
         # Headers
         {},
         # Body
-        {"access_token": "user", "refresh_token": "freshmenthol"},
+        {"access_token": "mey_authcode", "refresh_token": "freshmenthol"},
     ),
     (
         "post",
@@ -181,3 +181,7 @@ def state():
     with mock.patch("wagtail_oauth2.views.gen_state_name", return_value=state):
         yield state
 
+
+@pytest.fixture()
+def auth_code(mock_oauth2):
+    return "codecode"
