@@ -1,0 +1,3 @@
+[run]
+omit =
+    src/wagtail_oauth2/tests/*
