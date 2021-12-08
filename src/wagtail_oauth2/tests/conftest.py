@@ -6,7 +6,46 @@ from unittest import mock
 from urllib.parse import urlencode
 
 import pytest
+from django.contrib.auth import get_user_model
+from faker import Faker
 from requests import Response
+
+fake = Faker()
+
+
+@pytest.fixture(autouse=True)
+def enable_db_access_for_all_tests(db):
+    pass
+
+
+@pytest.fixture
+def user_mei():
+    user_cls = get_user_model()
+    try:
+        user = user_cls.objects.get(username="mei")
+    except user_cls.DoesNotExist:
+        user = user_cls()
+        user.username = "mei"
+        user.is_staff = True
+        user.email = "mei@toto.ro"
+        user.first_name = "Mei"
+        user.last_name = "Kusakabe"
+        user.is_superuser = True
+        user.save()
+    return user
+
+
+@pytest.fixture
+def random_userinfo():
+    return {
+        "username": f"{fake.user_name()}_{fake.pystr(4, 4)}",
+        "is_staff": True,
+        "email": fake.email(),
+        "first_name": fake.first_name(),
+        "last_name": fake.last_name(),
+        "is_superuser": True,
+    }
+
 
 API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
     (
@@ -41,7 +80,7 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
     ),
     (
         "post",
-        'https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=freshmenthol',
+        "https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=freshmenthol",
     ): (
         200,
         # Headers
@@ -51,7 +90,7 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
     ),
     (
         "post",
-        'https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=e409',
+        "https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=e409",
     ): (
         409,
         # Headers
@@ -61,7 +100,7 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
     ),
     (
         "post",
-        'https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=e500',
+        "https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=e500",
     ): (
         500,
         # Headers
@@ -134,3 +173,11 @@ def mock_oauth2():
     yield RequestsMock
     mock_req.stop()
     RequestsMock.api_calls.clear()
+
+
+@pytest.fixture()
+def state():
+    state = fake.pystr(4, 4)
+    with mock.patch("wagtail_oauth2.views.gen_state_name", return_value=state):
+        yield state
+

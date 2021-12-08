@@ -1,0 +1,13 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+
+{% block titletag %}{% trans "Authentication Error" %}{% endblock %}
+{% block content %}
+    {% trans "Authentication Error" as account_str %}
+    {% include "wagtailadmin/shared/header.html" with title=account_str %}
+
+    <div class="nice-padding">
+        <h1>{{error}}</h1>
+        <p>{{error_description}}</p>
+    </div>
+{% endblock %}

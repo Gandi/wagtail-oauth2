@@ -1,5 +1,4 @@
 import pytest
-from wagtail_oauth2 import __version__
 
 from wagtail_oauth2.resources import Token
 

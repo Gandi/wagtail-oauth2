@@ -15,6 +15,7 @@ lib/
 lib64/
 *.egg-info/
 *.egg
+*.db
 
 .coverage
 tests/*.xml
