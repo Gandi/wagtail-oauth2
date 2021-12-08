@@ -8,13 +8,14 @@ authors = ["Guillaume Gauvrit <guillaume@gandi.net>"]
 python = "^3.7"
 Django = "^3.2.4"
 wagtail = "^2.14.1"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.11b1"
 isort = "^5.10.1"
 pytest-django = "^4.4.0"
 xmlrunner = "^1.7.7"
-
+pytest-cov = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
