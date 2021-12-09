@@ -4,13 +4,17 @@ version = "0.1.1"
 description = "OAuth2.0 authentication fo wagtail"
 authors = ["Guillaume Gauvrit <guillaume@gandi.net>"]
 readme = "README.rst"
+license = "BSD-Derived"
 classifiers = [
   "Intended Audience :: Developers",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: Internet :: WWW/HTTP",
   "Framework :: Wagtail",
-  "Framework :: Wagtail :: 2"
+  "Framework :: Wagtail :: 2",
+  "License :: OSI Approved :: BSD License"
 ]
+homepage = "https://wagtail-oauth2.readthedocs.io/en/latest/"
+repository = "https://github.com/Gandi/wagtail-oauth2"
 
 [tool.poetry.dependencies]
 python = "^3.7"
