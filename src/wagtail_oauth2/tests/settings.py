@@ -29,7 +29,6 @@ OAUTH2_CLIENT_SECRET = "T0t0r0"
 OAUTH2_AUTH_URL = "https://gandi.v5/authorize"
 OAUTH2_TOKEN_URL = "https://gandi.v5/token"
 OAUTH2_LOGOUT_URL = "https://gandi.v5/logout"
-OAUTH2_USERINFO_URL = "https://gandi.v5/tokeninfo"
 
 
 ROOT_URLCONF = "wagtail_oauth2.tests.urls"
@@ -49,7 +48,6 @@ DATABASES: Dict[str, Dict[str, Any]] = {
 
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
