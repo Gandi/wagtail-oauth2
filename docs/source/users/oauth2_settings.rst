@@ -27,8 +27,8 @@ They are all prefixed by `OAUTH2_`:
 +---------------------------+---------------------------------------+-----------+-----------+
 
 
-The settings OAUTH2_LOAD_USERINFO is a function that take an access_token in parameter,
-and build a python dict or raise a PermissionDenied error.
+The settings `OAUTH2_LOAD_USERINFO` is a function that takes an `access_token` in parameter,
+and builds a python dict or raises a `PermissionDenied` error.
 
 Basically, this method is about fetching some information on the user loaded using
 OAuth2.0 API and decide to grant the user to logged in, and to get the role of 
