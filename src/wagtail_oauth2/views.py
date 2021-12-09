@@ -1,5 +1,5 @@
 """
-Views to login using an OAuth2.0 Authorization Server.
+Views to log in using an OAuth2.0 Authorization Server.
 
 Currently, we do not keep the access and refresh token in the session,
 because it is not necessary.
