@@ -2,11 +2,15 @@ import os
 import os.path
 from typing import Dict, Any
 
+from django.core.exceptions import PermissionDenied
+
 USERS = {
-    "mey_authcode": {
+    "mey_accesstoken": {
         "username": "mei",
+        "is_superuser": True,
     }
 }
+
 
 def load_userinfo(access_token):
     """
@@ -15,7 +19,10 @@ def load_userinfo(access_token):
     Return a dict containing username, email, first_name, last_name, and
     is_superuser fields to register any new user.
     """
-    return USERS.get(access_token, {})
+    try:
+        return USERS[access_token]
+    except KeyError:
+        raise PermissionDenied
 
 
 OAUTH2_VERIFY_CERTIFICATE = False
@@ -58,9 +65,7 @@ INSTALLED_APPS = [
     "tests",
 ]
 
-MIDDLEWARE = [
-    "django.contrib.sessions.middleware.SessionMiddleware"
-]
+MIDDLEWARE = ["django.contrib.sessions.middleware.SessionMiddleware"]
 
 
 TEMPLATES = [

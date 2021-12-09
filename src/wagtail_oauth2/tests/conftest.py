@@ -56,7 +56,7 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
         # Headers
         {},
         # Body
-        {"access_token": "mey_authcode", "refresh_token": "freshmenthol"},
+        {"access_token": "mey_accesstoken", "refresh_token": "freshmenthol"},
     ),
     (
         "post",

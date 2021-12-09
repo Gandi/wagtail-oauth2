@@ -36,20 +36,57 @@ that user.
 
 The userinfo dict contains the following keys:
 
-+--------------+------------------------------------+--------------------------------+-----------+
-| key          | description                        | mandatory (default)            | type      |
-+==============+====================================+================================+===========+
-| username     | user identifier                    | yes                            | str       |
-+--------------+------------------------------------+--------------------------------+-----------+
-| is_superuser | make the user an admin on creation | yes                            | bool      |
-+--------------+------------------------------------+--------------------------------+-----------+
-| email        | email address (recommanded)        | no                             | str       |
-+--------------+------------------------------------+--------------------------------+-----------+
-| first_name   | first name of the user             | no                             | str       |
-+--------------+------------------------------------+--------------------------------+-----------+
-| last_name    | last name of the user              | no                             | str       |
-+--------------+------------------------------------+--------------------------------+-----------+
-| is_staff     | grant access to the wagtail admin  | no (True)                      | bool      |
-+--------------+------------------------------------+--------------------------------+-----------+
-| groups       | subscribe non superuser to groups  | no (["Moderators", "Editors"]) | List[str] |
-+--------------+------------------------------------+--------------------------------+-----------+
++--------------+-------------------------------------+--------------------------------+-----------+
+| key          | description                         | mandatory (default)            | type      |
++==============+=====================================+================================+===========+
+| username     | user identifier                     | yes                            | str       |
++--------------+-------------------------------------+--------------------------------+-----------+
+| is_superuser | makes the user an admin on creation | yes                            | bool      |
++--------------+-------------------------------------+--------------------------------+-----------+
+| email        | email address (recommanded)         | no                             | str       |
++--------------+-------------------------------------+--------------------------------+-----------+
+| first_name   | first name of the user              | no                             | str       |
++--------------+-------------------------------------+--------------------------------+-----------+
+| last_name    | last name of the user               | no                             | str       |
++--------------+-------------------------------------+--------------------------------+-----------+
+| is_staff     | grant access to the wagtail admin   | no (True)                      | bool      |
++--------------+-------------------------------------+--------------------------------+-----------+
+| groups       | subscribe non superuser to groups   | no (["Moderators", "Editors"]) | List[str] |
++--------------+-------------------------------------+--------------------------------+-----------+
+
+
+Exemple of settings
+~~~~~~~~~~~~~~~~~~~
+
+
+::
+
+
+   USERS = {
+      "mey_accesstoken": {
+         "username": "mei",
+         "is_superuser": True,
+      }
+   }
+
+
+   def load_userinfo(access_token):
+      try:
+         # Real code consume an api with a header 
+         # f"Authorization: Bearer {access_token}"
+         return USERS[access_token]
+      except KeyError:
+         raise PermissionDenied
+
+
+   OAUTH2_LOAD_USERINFO = load_userinfo
+
+   OAUTH2_CLIENT_ID = "Mei"
+   OAUTH2_CLIENT_SECRET = "T0t0r0"
+
+   OAUTH2_AUTH_URL = "https://gandi.v5/authorize"
+   OAUTH2_TOKEN_URL = "https://gandi.v5/token"
+   OAUTH2_LOGOUT_URL = "https://gandi.v5/logout"
+
+   OAUTH2_VERIFY_CERTIFICATE = True
+   OAUTH2_TIMEOUT = 30
