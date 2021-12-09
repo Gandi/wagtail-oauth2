@@ -1,8 +1,8 @@
 Wagtail OAuth2.0 Login
 ======================
 
-.. image:: https://readthedocs.org/projects/aioli-client/badge/?version=latest
-   :target: https://aioli-client.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/wagtail-oauth2/badge/?version=latest
+   :target: https://wagtail-oauth2.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 .. image:: https://github.com/Gandi/wagtail-oauth2/actions/workflows/main.yml/badge.svg
