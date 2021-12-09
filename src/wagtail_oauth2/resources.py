@@ -1,3 +1,6 @@
+"""
+Manage OAuth2.0 Resources.
+"""
 import logging
 
 from urllib.parse import urlencode
@@ -10,9 +13,11 @@ from .settings import get_setting
 log = logging.getLogger(__name__)
 
 
-class Token(object):
+class Token:
+    """Retrieve tokens from the OAuth2.0 Resource server."""
     @classmethod
     def by_authcode(cls, auth_code):
+        "Retrieve Tokens from an authorization code."
         try:
             token_url = get_setting("TOKEN_URL")
             log.info("Fetching token on %s/token" % token_url)
@@ -49,6 +54,7 @@ class Token(object):
 
     @classmethod
     def get_authenticated_url(cls, login_url, state):
+        "Get the authorization url with its parameter."
         data = {
             "client_id": get_setting("CLIENT_ID"),
             "redirect_uri": login_url,
@@ -61,6 +67,7 @@ class Token(object):
 
     @classmethod
     def by_refresh_token(cls, refresh_token):
+        "Retrieve Tokens from a refresh tokend."
         try:
             token_url = get_setting("TOKEN_URL")
             log.info("Refreshing token on %s/token" % token_url)

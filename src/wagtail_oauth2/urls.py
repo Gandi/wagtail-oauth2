@@ -8,3 +8,4 @@ urlpatterns = [
     url(r"^login/$", Oauth2LoginView.as_view(), name="wagtailadmin_login"),
     url(r"^logout/$", Oauth2LogoutView.as_view(), name="wagtailadmin_logout"),
 ]
+"""Url to load in the app."""

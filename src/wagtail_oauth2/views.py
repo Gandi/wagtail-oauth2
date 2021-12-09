@@ -25,10 +25,12 @@ log = logging.getLogger(__name__)
 
 
 def gen_state_name():
+    """Generate a random state name."""
     return binascii.hexlify(os.urandom(5)).decode("ascii")
 
 
 def get_cookie_name(state):
+    """Generate the cookie name for the OAuth2.0 state."""
     return f"oauth.{state}"
 
 
@@ -63,6 +65,7 @@ def get_user_from_userinfo(userinfo):
 
 
 class Oauth2LoginView(LoginView):
+    """Login view."""
 
     template_name = "login_error.html"
 
@@ -154,6 +157,8 @@ class Oauth2LoginView(LoginView):
 
 
 class Oauth2LogoutView(LogoutView):
+    """Logout view."""
+
     def dispatch(self, request, *args, **kwargs):
         """Handle every HTTP Query to logout user."""
 
