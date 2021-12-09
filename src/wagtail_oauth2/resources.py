@@ -24,8 +24,8 @@ class Token(object):
                     "grant_type": "authorization_code",
                     "code": auth_code,
                 },
-                verify=get_setting("VERIFY_CERTIFICATE"),
-                timeout=get_setting("TIMEOUT"),
+                verify=get_setting("VERIFY_CERTIFICATE", True),
+                timeout=get_setting("TIMEOUT", 30),
             )
             response.raise_for_status()
             return response.json()
@@ -72,8 +72,8 @@ class Token(object):
                     "grant_type": "refresh_token",
                     "refresh_token": refresh_token,
                 },
-                verify=get_setting("VERIFY_CERTIFICATE"),
-                timeout=get_setting("TIMEOUT"),
+                verify=get_setting("VERIFY_CERTIFICATE", True),
+                timeout=get_setting("TIMEOUT", 30),
             )
             response.raise_for_status()
             tokens = response.json()

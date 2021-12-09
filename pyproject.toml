@@ -1,8 +1,16 @@
 [tool.poetry]
 name = "wagtail-oauth2"
 version = "0.1.0"
-description = ""
+description = "OAuth2.0 authentication fo wagtail"
 authors = ["Guillaume Gauvrit <guillaume@gandi.net>"]
+readme = "README.rst"
+classifiers = [
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Internet :: WWW/HTTP",
+  "Framework :: Wagtail",
+  "Framework :: Wagtail :: 2"
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -17,6 +25,9 @@ pytest-django = "^4.4.0"
 xmlrunner = "^1.7.7"
 pytest-cov = "^3.0.0"
 Faker = "^10.0.0"
+Sphinx = "^4.3.1"
+sphinx-rtd-theme = "^1.0.0"
+tomlkit = "^0.7.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

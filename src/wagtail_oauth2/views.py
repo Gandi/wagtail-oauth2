@@ -1,8 +1,7 @@
 """
-Views to login using Gandi ID.
+Views to log in using an OAuth2.0 Authorization Server.
 
-Currently we use Gandi ID as a SSO,
-we do not keep the access and refresh token in the session,
+Currently, we do not keep the access and refresh token in the session,
 because it is not necessary.
 
 It could be done later to retrieve data from API using OAuth2 authorizations.
@@ -39,7 +38,7 @@ class StateError(ValueError):
 
 def get_user_from_userinfo(userinfo):
     """Create or retrieve a user from the wagtail point of view, from the userinfo."""
-    username = userinfo.get("username")
+    username = userinfo["username"]
     user_cls = get_user_model()
     try:
         user = user_cls.objects.get(username=username)
@@ -47,20 +46,19 @@ def get_user_from_userinfo(userinfo):
         # Create a new user. There's no need to set a password
         # because only the password from settings.py is checked.
         user = user_cls(username=username)
-        user.is_staff = True
 
+        user.is_staff = userinfo.get("is_staff", True)
         user.email = userinfo.get("email")
         user.first_name = userinfo.get("first_name")
         user.last_name = userinfo.get("last_name")
         user.is_superuser = userinfo["is_superuser"]
         user.save()
         if not user.is_superuser:
-            moderators_group = Group.objects.filter(name="Moderators").first()
-            moderators_group.user_set.add(user)
-            moderators_group.save()
-            editors_group = Group.objects.filter(name="Editors").first()
-            editors_group.user_set.add(user)
-            moderators_group.save()
+            groups = userinfo.get("groups", ["Moderators", "Editors"])
+            for group_name in groups:
+                group = Group.objects.filter(name=group_name).first()
+                group.user_set.add(user)
+                group.save()
     return user
 
 
