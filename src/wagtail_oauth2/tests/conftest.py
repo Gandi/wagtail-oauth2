@@ -108,6 +108,20 @@ API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
         # Body
         {},
     ),
+    (
+        "post",
+        "https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&grant_type=refresh_token&refresh_token=xyz",
+    ): (
+        200,
+        # Headers
+        {},
+        # Body
+        {
+            "access_token": "toktok",
+            "refresh_token": "totoro",
+            "expires_in": 3600,
+        },
+    ),
 }
 
 
@@ -185,3 +199,13 @@ def state():
 @pytest.fixture()
 def auth_code(mock_oauth2):
     return "codecode"
+
+
+class DummyRequestWithSession:
+    def __init__(self, session):
+        self.session = session or {}
+
+
+@pytest.fixture()
+def dummy_request_with_session(params):
+    yield DummyRequestWithSession(params.get("session"))

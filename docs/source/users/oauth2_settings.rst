@@ -5,26 +5,42 @@ Configure OAuth2.0
 
 They are all prefixed by `OAUTH2_`:
 
+.. |br| raw:: html
 
-+---------------------------+---------------------------------------------------+-----------+
-| name                      | description                           | mandatory | type      |
-+===========================+=======================================+===========+===========+
-| OAUTH2_CLIENT_ID          | OAuth2.0 client id                    | yes       | str       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_CLIENT_SECRET      | OAuth2.0 client secret                | yes       | str       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_AUTH_URL           | /authorize endpoint                   | yes       | str       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_TOKEN_URL          | /token url                            | yes       | str       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_LOAD_USERINFO      | Load user info from the oauth2 server | yes       | callable  |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_LOGOUT_URL         | url to redirect on logout             | yes       | str       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_TIMEOUT            | HTTP Timeout in seconds               | no (30)   | int       |
-+---------------------------+---------------------------------------+-----------+-----------+
-| OAUTH2_VERIFY_CERTIFICATE | Check TLS while consuming tokens      | no (True) | bool      |
-+---------------------------+---------------------------------------+-----------+-----------+
+  <div style="line-height: 0; padding: 0; margin: 0"></div>
+
+
++---------------------------+---------------------------+---------------------+-----------+
+| name                      | description               | mandatory           | type      |
++===========================+===========================+=====================+===========+
+| OAUTH2_CLIENT_ID          | OAuth2.0 client id        | yes                 | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_CLIENT_SECRET      | OAuth2.0 client secret    | yes                 | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_AUTH_URL           | /authorize endpoint       | yes                 | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_TOKEN_URL          | /token url                | yes                 | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_LOAD_USERINFO      | Load user info |br|       | yes                 | callable  |
+|                           | from the oauth2 server    |                     |           |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_LOGOUT_URL         | url to redirect on logout | yes                 | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_TIMEOUT            | HTTP Timeout in seconds   | no (30)             | int       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_VERIFY_CERTIFICATE | Check TLS while |br|      | no (True)           | bool      |
+|                           | consuming tokens          |                     |           |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_STORE_TOKENS       | Save the tokens |br|      | no (False)          | bool      |
+|                           | in the django session     |                     |           |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_SESSION_KEY_PREFIX | Prefix of the key in |br| | no                  |           |
+|                           | the django session.       | (`wagtail_oauth2_`) | str       |
++---------------------------+---------------------------+---------------------+-----------+
+| OAUTH2_DEFAULT_TTL        | Fallback value if |br|    | no (900)            | int       |
+|                           | ``expires_in`` is         |                     |           |
+|                           | missing                   |                     |           |
++---------------------------+---------------------------+---------------------+-----------+
 
 
 The settings `OAUTH2_LOAD_USERINFO` is a function that takes an `access_token` in parameter,
@@ -90,3 +106,10 @@ Exemple of settings
 
    OAUTH2_VERIFY_CERTIFICATE = True
    OAUTH2_TIMEOUT = 30
+
+
+Consideration before activating OAUTH2_STORE_TOKENS
+---------------------------------------------------
+
+In OAuth2.0, tokens are for the app, not the user, so the session
+must be secure to avoid security issues.
