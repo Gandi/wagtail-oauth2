@@ -169,7 +169,6 @@ class RequestsMock(mock.Mock):
                 status, headers, res = api_response[(method, url)]
                 res = json.dumps(res)
             else:
-                breakpoint()
                 print(f"{method} {url} is missing returning missing results")
                 status, headers, res = missing_status, None, missing_body
             RequestsMock.api_calls[(method, url)].append(kwargs)
