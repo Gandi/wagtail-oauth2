@@ -9,13 +9,16 @@ It could be done later to retrieve data from API using OAuth2 authorizations.
 import binascii
 import logging
 import os
+from typing import cast
 
 from django.conf import settings
 from django.contrib.auth import get_user_model, login as auth_login
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 from django.urls import reverse
 from wagtail.admin.views.account import LoginView, LogoutView
+from wagtail_oauth2.utils import save_tokens
 
 from .resources import Token
 from .settings import get_setting
@@ -38,7 +41,7 @@ class StateError(ValueError):
     """raised in case the oauth2 state workflow is not valid."""
 
 
-def get_user_from_userinfo(userinfo):
+def get_user_from_userinfo(userinfo) -> AbstractBaseUser:
     """Create or retrieve a user from the wagtail point of view, from the userinfo."""
     username = userinfo["username"]
     user_cls = get_user_model()
@@ -117,10 +120,14 @@ class Oauth2LoginView(LoginView):
         """Retrieve a bearer token from the authorization code, log the user."""
         log.info("Consume the code")
         token = Token.by_authcode(request.GET["code"])
-
-        userinfo = get_setting("LOAD_USERINFO")(token["access_token"])
+        load_user = get_setting("LOAD_USERINFO")
+        if load_user is None:
+            raise RuntimeError("Missing configuration OAUTH2_LOAD_USERINFO")
+        userinfo = load_user(token["access_token"])
         user = get_user_from_userinfo(userinfo)
-        auth_login(self.request, user)
+        auth_login(request, user)
+        if get_setting("STORE_TOKENS", False):
+            save_tokens(request, token)
         return redirect(redirect_uri)
 
     def render_error(self, error, error_description):

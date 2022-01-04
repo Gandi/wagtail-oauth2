@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wagtail-oauth2"
-version = "0.2.0"
+version = "0.2.1"
 description = "OAuth2.0 authentication fo wagtail"
 authors = ["Guillaume Gauvrit <guillaume@gandi.net>"]
 readme = "README.rst"
@@ -32,6 +32,11 @@ Faker = "^10.0.0"
 Sphinx = "^4.3.1"
 sphinx-rtd-theme = "^1.0.0"
 tomlkit = "^0.7.2"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
