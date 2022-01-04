@@ -74,7 +74,6 @@ The userinfo dict contains the following keys:
 Exemple of settings
 ~~~~~~~~~~~~~~~~~~~
 
-
 ::
 
 
@@ -109,7 +108,7 @@ Exemple of settings
 
 
 Consideration before activating OAUTH2_STORE_TOKENS
----------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In OAuth2.0, tokens are for the app, not the user, so the session
 must be secure to avoid security issues.

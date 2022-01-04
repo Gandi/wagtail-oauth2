@@ -1,5 +1,6 @@
-Wagtail OAuth2.0 Login
-======================
+==============
+Wagtail OAuth2
+==============
 
 .. image:: https://readthedocs.org/projects/wagtail-oauth2/badge/?version=latest
    :target: https://wagtail-oauth2.readthedocs.io/en/latest/?badge=latest

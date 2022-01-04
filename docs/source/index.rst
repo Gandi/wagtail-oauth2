@@ -3,15 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Wagtail OAuth2
-==============
-
+.. include:: ../../README.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Users Documentation:
 
-   users/index
+   users/installation
+   users/oauth2_settings
+   changelog
 
 
 Indices and tables
