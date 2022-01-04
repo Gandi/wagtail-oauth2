@@ -112,4 +112,4 @@ Consideration before activating OAUTH2_STORE_TOKENS
 --------------------------------------------------
 
 In OAuth2.0, tokens are for the app, not the user, so the session
-must be secure to avoid security issue.
+must be secure to avoid security issues.
