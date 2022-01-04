@@ -108,7 +108,7 @@ Exemple of settings
    OAUTH2_TIMEOUT = 30
 
 
-Considertion before activating OAUTH2_STORE_TOKENS
+Consideration before activating OAUTH2_STORE_TOKENS
 --------------------------------------------------
 
 In OAuth2.0, tokens are for the app, not the user, so the session
