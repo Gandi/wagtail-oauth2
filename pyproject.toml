@@ -44,6 +44,7 @@ ignore = ["RUF022"]
 [dependency-groups]
 dev = [
     "Faker >=10.0.0,<11.0.0",
+    "html5lib>=1.1",
     "pytest-cov >=3.0.0,<4.0.0",
     "pytest-django >=4.4.0,<5.0.0",
     "ruff >=0.14.13,<1",
@@ -51,6 +52,11 @@ dev = [
     "sphinx-rtd-theme >=1.0.0,<2.0.0",
     "tomlkit >=0.7.2,<1.0.0",
 ]
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+python_files = "test_*.py"
 
 
 [build-system]

@@ -37,8 +37,9 @@ OAUTH2_AUTH_URL = "https://gandi.v5/authorize"
 OAUTH2_TOKEN_URL = "https://gandi.v5/token"
 OAUTH2_LOGOUT_URL = "https://gandi.v5/logout"
 
+STATIC_URL = "/static/"
 
-ROOT_URLCONF = "wagtail_oauth2.tests.urls"
+ROOT_URLCONF = "tests.urls"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "beep"
@@ -61,7 +62,7 @@ INSTALLED_APPS = [
     "wagtail_oauth2",
     "wagtail.admin",
     "wagtail.users",
-    "wagtail.core",
+    "wagtail",
     "tests",
 ]
 

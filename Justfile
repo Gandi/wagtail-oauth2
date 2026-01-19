@@ -1,8 +1,8 @@
 package := 'wagtail_oauth2'
-default_test_suite := 'src/tests'
+default_test_suite := 'tests'
 
 install:
-    uv sync --group doc --frozen
+    uv sync --group dev --frozen
 
 update:
     uv sync --group dev
