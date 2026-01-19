@@ -1,3 +1,9 @@
+2.0.4 - Released on 2026-01-19
+------------------------------
+* Fix the documentation build, link and badge.
+  The doc is know hosted on github pages, the old documentation
+  is still published.
+
 2.0.3 - Released on 2026-01-19
 ------------------------------
 * Massive cleanup
