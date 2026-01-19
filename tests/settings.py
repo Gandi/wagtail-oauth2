@@ -1,6 +1,6 @@
 import os
 import os.path
-from typing import Dict, Any
+from typing import Any
 
 from django.core.exceptions import PermissionDenied
 
@@ -21,8 +21,8 @@ def load_userinfo(access_token):
     """
     try:
         return USERS[access_token]
-    except KeyError:
-        raise PermissionDenied
+    except KeyError as exc:
+        raise PermissionDenied from exc
 
 
 OAUTH2_VERIFY_CERTIFICATE = False
@@ -37,13 +37,14 @@ OAUTH2_AUTH_URL = "https://gandi.v5/authorize"
 OAUTH2_TOKEN_URL = "https://gandi.v5/token"
 OAUTH2_LOGOUT_URL = "https://gandi.v5/logout"
 
+STATIC_URL = "/static/"
 
-ROOT_URLCONF = "wagtail_oauth2.tests.urls"
+ROOT_URLCONF = "tests.urls"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "beep"
 
-DATABASES: Dict[str, Dict[str, Any]] = {
+DATABASES: dict[str, dict[str, Any]] = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "test.db"),
@@ -61,7 +62,7 @@ INSTALLED_APPS = [
     "wagtail_oauth2",
     "wagtail.admin",
     "wagtail.users",
-    "wagtail.core",
+    "wagtail",
     "tests",
 ]
 

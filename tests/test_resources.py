@@ -29,7 +29,9 @@ def test_token_by_authcode(mock_oauth2):
     }
 
 
-@pytest.mark.parametrize("authcode", ["badcode", "e500", "TimeoutError", "ConnectionError", "RuntimeError"])
+@pytest.mark.parametrize(
+    "authcode", ["badcode", "e500", "TimeoutError", "ConnectionError", "RuntimeError"]
+)
 def test_token_by_authcode_unkown_user(authcode, mock_oauth2):
     tokens = Token.by_authcode(authcode)
     assert tokens == {}
@@ -68,7 +70,11 @@ def test_by_refresh_token(mock_oauth2):
         ]
     }
 
-@pytest.mark.parametrize("refresh_troken", ["e409", "e500", "TimeoutError", "ConnectionError", "RuntimeError"])
+
+@pytest.mark.parametrize(
+    "refresh_troken",
+    ["e409", "e500", "TimeoutError", "ConnectionError", "RuntimeError"],
+)
 def test_by_refresh_token_4xx(refresh_troken, mock_oauth2):
     tokens = Token.by_refresh_token(refresh_troken)
     assert tokens == {}

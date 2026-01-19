@@ -1,8 +1,8 @@
 import time
 from typing import cast
 
-from .settings import get_setting
 from .resources import Token
+from .settings import get_setting
 
 DEFAULT_SESSION_KEY_PREFIX = "wagtail_oauth2_"
 

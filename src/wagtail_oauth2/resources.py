@@ -1,12 +1,12 @@
 """
 Manage OAuth2.0 Resources.
 """
-import logging
 
+import logging
 from urllib.parse import urlencode
 
 import requests
-from requests.exceptions import HTTPError, ConnectionError, Timeout
+from requests.exceptions import ConnectionError, HTTPError, Timeout
 
 from .settings import get_setting
 
@@ -15,12 +15,13 @@ log = logging.getLogger(__name__)
 
 class Token:
     """Retrieve tokens from the OAuth2.0 Resource server."""
+
     @classmethod
     def by_authcode(cls, auth_code):
         "Retrieve Tokens from an authorization code."
         try:
             token_url = get_setting("TOKEN_URL")
-            log.info("Fetching token on %s/token" % token_url)
+            log.info(f"Fetching token on {token_url}/token")
             response = requests.post(
                 token_url,
                 data={
@@ -36,19 +37,17 @@ class Token:
             return response.json()
 
         except (ConnectionError, TimeoutError, Timeout) as exc:
-            log.error("OAuth2 server is down: %s" % exc.__class__.__name__)
+            log.error(f"OAuth2 server is down: {exc.__class__.__name__}")
         except HTTPError as exc:
             if exc.response.status_code >= 500:
                 log.error(
-                    "OAuth2 server is not working properly? got %s"
-                    % exc.response.status_code
+                    f"OAuth2 server is not working properly? got {exc.response.status_code}"
                 )
             else:
-                log.error("Cannot retrieve token: %s" % exc.response.text)
+                log.error(f"Cannot retrieve token: {exc.response.text}")
         except Exception:
             log.exception(
-                "Unexpected exception while retrieving token using "
-                "authorization code"
+                "Unexpected exception while retrieving token using authorization code"
             )
         return {}
 
@@ -61,16 +60,14 @@ class Token:
             "response_type": "code",
             "state": state,
         }
-        return "{}?{}".format(
-            get_setting("AUTH_URL"), urlencode(data, doseq=True)
-        )
+        return "{}?{}".format(get_setting("AUTH_URL"), urlencode(data, doseq=True))
 
     @classmethod
     def by_refresh_token(cls, refresh_token):
         "Retrieve Tokens from a refresh tokend."
         try:
             token_url = get_setting("TOKEN_URL")
-            log.info("Refreshing token on %s/token" % token_url)
+            log.info(f"Refreshing token on {token_url}/token")
             response = requests.post(
                 token_url,
                 data={
@@ -86,7 +83,7 @@ class Token:
             tokens = response.json()
             return tokens
         except (ConnectionError, TimeoutError, Timeout) as exc:
-            log.error("OAuth2 server is down: %s" % exc.__class__.__name__)
+            log.error(f"OAuth2 server is down: {exc.__class__.__name__}")
         except HTTPError as exc:
             if 400 <= exc.response.status_code < 500:
                 log.warning(
@@ -95,7 +92,7 @@ class Token:
                     exc.response.status_code,
                     exc.response.text,
                 )
-            elif 500 <=exc.response.status_code < 600:
+            elif 500 <= exc.response.status_code < 600:
                 log.error(
                     "OAuth2 server is not working properly? got %s",
                     exc.response.status_code,

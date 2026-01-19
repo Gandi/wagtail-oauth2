@@ -1,43 +1,64 @@
-[tool.poetry]
+[project]
 name = "wagtail-oauth2"
 version = "1.0.0"
 description = "OAuth2.0 authentication fo wagtail"
-authors = ["Guillaume Gauvrit <guillaume@gandi.net>"]
 readme = "README.rst"
-license = "BSD-Derived"
-classifiers = [
-  "Intended Audience :: Developers",
-  "Topic :: Software Development :: Libraries :: Python Modules",
-  "Topic :: Internet :: WWW/HTTP",
-  "Framework :: Wagtail",
-  "Framework :: Wagtail :: 2",
-  "License :: OSI Approved :: BSD License"
+authors = [
+    {name = "Guillaume Gauvrit", email = "guillaume@gandi.net"},
 ]
+license = {text = "BSD-Derived"}
+requires-python = ">=3.7,<4.0"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 2",
+    "License :: OSI Approved :: BSD License",
+]
+dependencies = [
+    "Django >=3.2.0,<5",
+    "wagtail >=4.0,<8",
+    "requests >=2.26.0,<3",
+]
+
+[project.urls]
 homepage = "https://wagtail-oauth2.readthedocs.io/en/latest/"
 repository = "https://github.com/Gandi/wagtail-oauth2"
 
-[tool.poetry.dependencies]
-python = "^3.7"
-Django = ">=3.2.0,<5"
-wagtail = ">=2.14,<4.0"
-requests = ">=2.26.0"
+[tool.ruff]
+line-length = 88
+target-version = "py310"
 
-[tool.poetry.dev-dependencies]
-black = "^21.11b1"
-isort = "^5.10.1"
-pytest-django = "^4.4.0"
-xmlrunner = "^1.7.7"
-pytest-cov = "^3.0.0"
-Faker = "^10.0.0"
-Sphinx = "^4.3.1"
-sphinx-rtd-theme = "^1.0.0"
-tomlkit = "^0.7.2"
+[tool.ruff.lint]
+select = [
+    "B",   # bug bear security warning
+    "I",   # isort import order
+    "F",   # pyflakes
+    "UP",  # alter when better syntax is available
+    "RUF", # the ruff developper's own rules
+]
+ignore = ["RUF022"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 88
+
+[dependency-groups]
+dev = [
+    "Faker >=10.0.0,<11.0.0",
+    "html5lib>=1.1",
+    "pytest-cov >=3.0.0,<4.0.0",
+    "pytest-django >=4.4.0,<5.0.0",
+    "ruff >=0.14.13,<1",
+    "sphinx >=4.3.1,<5.0.0",
+    "sphinx-rtd-theme >=1.0.0,<2.0.0",
+    "tomlkit >=0.7.2,<1.0.0",
+]
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+python_files = "test_*.py"
+
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
