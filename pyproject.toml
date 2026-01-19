@@ -18,7 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "Django >=3.2.0,<5",
-    "wagtail >=2.14,<4.0",
+    "wagtail >=4.0,<8",
     "requests >=2.26.0,<3",
 ]
 
@@ -26,21 +26,28 @@ dependencies = [
 homepage = "https://wagtail-oauth2.readthedocs.io/en/latest/"
 repository = "https://github.com/Gandi/wagtail-oauth2"
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 88
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "B",   # bug bear security warning
+    "I",   # isort import order
+    "F",   # pyflakes
+    "UP",  # alter when better syntax is available
+    "RUF", # the ruff developper's own rules
+]
+ignore = ["RUF022"]
 
 
 [dependency-groups]
 dev = [
-    "black >=21.11b1,<22.0",
-    "isort >=5.10.1,<6.0.0",
-    "pytest-django >=4.4.0,<5.0.0",
-    "xmlrunner >=1.7.7,<2.0.0",
-    "pytest-cov >=3.0.0,<4.0.0",
     "Faker >=10.0.0,<11.0.0",
-    "Sphinx >=4.3.1,<5.0.0",
+    "pytest-cov >=3.0.0,<4.0.0",
+    "pytest-django >=4.4.0,<5.0.0",
+    "ruff >=0.14.13,<1",
+    "sphinx >=4.3.1,<5.0.0",
     "sphinx-rtd-theme >=1.0.0,<2.0.0",
     "tomlkit >=0.7.2,<1.0.0",
 ]
