@@ -2,9 +2,10 @@
 Wagtail OAuth2
 ==============
 
-.. image:: https://readthedocs.org/projects/wagtail-oauth2/badge/?version=latest
-   :target: https://wagtail-oauth2.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
+.. image:: https://github.com/gandi/wagtail-oauth2/actions/workflows/publish-doc.yml/badge.svg
+   :target: https://gandi.github.io/wagtail-oauth2/l
+   :alt: Documentation
+
 
 .. image:: https://github.com/Gandi/wagtail-oauth2/actions/workflows/tests.yml/badge.svg
    :target: https://github.com/Gandi/wagtail-oauth2/actions/workflows/tests.yml
@@ -29,4 +30,4 @@ Read More
 You can read the `full documentation of this library here`_.
 
 
-.. _`full documentation of this library here`: https://wagtail-oauth2.readthedocs.io/en/latest/
+.. _`full documentation of this library here`: https://gandi.github.io/wagtail-oauth2/
