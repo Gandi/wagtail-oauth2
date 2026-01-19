@@ -34,7 +34,7 @@ jobs:
 
       - name: "Install"
         run: |
-          pip install dist/wagtail-oauth2-*.whl --force-reinstall
+          pip install dist/wagtail_oauth2-*.whl --force-reinstall
 
       - name: "Test sdist"
         run: |
