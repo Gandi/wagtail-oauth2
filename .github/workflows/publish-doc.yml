@@ -1,0 +1,30 @@
+name: Doc
+
+on:
+  workflow_call:
+    inputs:
+      release-version:
+        required: true
+        type: string
+      dry-run:
+        required: true
+        type: boolean
+
+  workflow_dispatch:
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write # Grants write access for GitHub Pages
+      id-token: write # Enables id-token for OIDC tokens
+    steps:
+      - id: deployment
+        uses: sphinx-notes/pages@v3
+        with:
+          documentation_path: docs/source
+          publish: ${{ !inputs.dry-run }}
+          python_version: 3.12
