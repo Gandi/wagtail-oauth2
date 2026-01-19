@@ -1,3 +1,8 @@
+2.0.5 - Released on 2026-01-19
+------------------------------
+* Fix 404 error on documentation badge.
+* Update classifier.
+
 2.0.4 - Released on 2026-01-19
 ------------------------------
 * Fix the documentation build, link and badge.
