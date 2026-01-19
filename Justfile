@@ -1,5 +1,5 @@
-package := 'blacksmith'
-default_test_suite := 'tests/unittests'
+package := 'wagtail_oauth2'
+default_test_suite := 'src/tests'
 
 install:
     uv sync --group doc --frozen
@@ -18,13 +18,10 @@ doc:
 cleandoc:
     cd docs && uv run make clean
 
-gensync:  && fmt
-    uv run python scripts/gen_unasync.py
-
 lint:
     uv run ruff check .
 
-test: gensync lint typecheck unittest functest
+test: lint unittest
 
 unittest test_suite=default_test_suite:
     uv run pytest -sxv {{test_suite}}
@@ -38,15 +35,9 @@ cov test_suite=default_test_suite:
     uv run pytest --cov-report=html --cov={{package}} {{test_suite}}
     xdg-open htmlcov/index.html
 
-functest:
-    uv run pytest -sxv tests/functionals
-
-typecheck:
-    uv run mypy src/ tests/
-
 fmt:
     uv run ruff check --fix .
-    uv run ruff format src tests
+    uv run ruff format src
 
 release major_minor_patch: test && changelog
     uvx --with=pdm,pdm-bump --python-preference system pdm bump {{major_minor_patch}}
