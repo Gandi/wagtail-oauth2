@@ -1,4 +1,4 @@
-2.0.1 - Released on 2026-01-19
+2.0.2 - Released on 2026-01-19
 ------------------------------
 * Massive cleanup
   * Add support of python 3.10, 3.11, 3.12, 3.13 and 3.14
