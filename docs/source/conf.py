@@ -13,20 +13,18 @@
 import os
 import sys
 
-import tomlkit
+import tomllib
 
 sys.path.insert(0, os.path.abspath("../../src"))
 
 # -- Project information -----------------------------------------------------
 def _get_project_meta():
-    with open("../../pyproject.toml") as pyproject:
-        file_contents = pyproject.read()
-
-    return tomlkit.parse(file_contents)["tool"]["poetry"]
+    with open("../../pyproject.toml", "rb") as pyproject:
+        return tomllib.load(pyproject)["project"]
 
 
 project = 'Wagtail-OAuth2'
-copyright = '2021, Gandi'
+copyright = '2021-current, Gandi'
 # author = 'Gandi'
 
 pkg_meta = _get_project_meta()
@@ -60,7 +58,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
