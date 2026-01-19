@@ -3,7 +3,7 @@ Wagtail OAuth2
 ==============
 
 .. image:: https://github.com/gandi/wagtail-oauth2/actions/workflows/publish-doc.yml/badge.svg
-   :target: https://gandi.github.io/wagtail-oauth2/l
+   :target: https://gandi.github.io/wagtail-oauth2/
    :alt: Documentation
 
 
