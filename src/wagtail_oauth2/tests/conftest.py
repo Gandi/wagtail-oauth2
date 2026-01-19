@@ -1,7 +1,7 @@
 import json
 from collections import defaultdict
 from io import BytesIO
-from typing import Any, Dict, Tuple
+from typing import Any, ClassVar
 from unittest import mock
 from urllib.parse import urlencode
 
@@ -47,7 +47,7 @@ def random_userinfo():
     }
 
 
-API_RESPONSE: Dict[Tuple[str, str], Tuple[int, Any, Any]] = {
+API_RESPONSE: dict[tuple[str, str], tuple[int, Any, Any]] = {
     (
         "post",
         "https://gandi.v5/token~client_id=Mei&client_secret=T0t0r0&code=codecode&grant_type=authorization_code",
@@ -129,16 +129,16 @@ class DummyResponse(Response):
     """Represent a requests response."""
 
     def __init__(self, body="", status_code=200, headers=None):
-        super(DummyResponse, self).__init__()
+        super().__init__()
         self.raw = BytesIO(body.encode("utf-8"))
         self.status_code = status_code
-        self.headers = headers or {}
+        self.headers: dict[str, str] = headers or {}
 
 
 class RequestsMock(mock.Mock):
     """A mock for request calls."""
 
-    api_calls = defaultdict(list)
+    api_calls: ClassVar = defaultdict(list)
 
     def __init__(
         self,
@@ -174,7 +174,7 @@ class RequestsMock(mock.Mock):
             RequestsMock.api_calls[(method, url)].append(kwargs)
             return DummyResponse(res, status, headers)
 
-        super(RequestsMock, self).__init__(side_effect=fake_api)
+        super().__init__(side_effect=fake_api)
 
 
 @pytest.fixture()

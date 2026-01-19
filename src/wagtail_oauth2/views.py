@@ -6,23 +6,24 @@ because it is not necessary.
 
 It could be done later to retrieve data from API using OAuth2 authorizations.
 """
+
 import binascii
 import logging
 import os
-from typing import cast
 
 from django.conf import settings
-from django.contrib.auth import get_user_model, login as auth_login
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 from django.urls import reverse
 from wagtail.admin.views.account import LoginView, LogoutView
+
 from wagtail_oauth2.utils import save_tokens
 
 from .resources import Token
 from .settings import get_setting
-
 
 log = logging.getLogger(__name__)
 

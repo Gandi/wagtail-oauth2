@@ -1,4 +1,5 @@
 """Load settings for the wagtail-oauth2 app."""
+
 from django.conf import settings
 
 global_prefix = "OAUTH2_"

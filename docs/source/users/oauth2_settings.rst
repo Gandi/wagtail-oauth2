@@ -47,7 +47,7 @@ The settings `OAUTH2_LOAD_USERINFO` is a function that takes an `access_token` i
 and builds a python dict or raises a `PermissionDenied` error.
 
 Basically, this method is about fetching some information on the user loaded using
-OAuth2.0 API and deciding to grant the user to log in, and to get the role of 
+OAuth2.0 API and deciding to grant the user to log in, and to get the role of
 that user.
 
 The userinfo dict contains the following keys:
@@ -87,11 +87,11 @@ Exemple of settings
 
    def load_userinfo(access_token):
       try:
-         # Real code consume an api with a header 
+         # Real code consume an api with a header
          # f"Authorization: Bearer {access_token}"
          return USERS[access_token]
-      except KeyError:
-         raise PermissionDenied
+      except KeyError as exc:
+         raise PermissionDenied from exc
 
 
    OAUTH2_LOAD_USERINFO = load_userinfo
