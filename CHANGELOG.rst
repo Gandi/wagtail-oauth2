@@ -1,4 +1,4 @@
-2.0.0 - Released on 2026-01-19
+2.0.1 - Released on 2026-01-19
 ------------------------------
 * Massive cleanup
   * Add support of python 3.10, 3.11, 3.12, 3.13 and 3.14
@@ -6,6 +6,7 @@
   * Drop support of python 3.7, 3.8 and 3.9
   * Drop support of wagtail 2, wagtail 3
 * Use uv instead of poetry
+* Massive update of github actions
 
 0.3.0  (2022-01-04)
 -------------------
