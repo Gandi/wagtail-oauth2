@@ -73,3 +73,23 @@ the settings `APP_DIRS` must be set to `True` in order to render it.
          "APP_DIRS": True,
       }
    ]
+
+
+URLS
+~~~~
+
+The oauth2 urls has to be installed before wagtail urls in order to get
+them override the defaults ones.
+
+::
+
+   from wagtail_oauth2 import urls as oauth2_urls
+
+
+   urlpatterns = [
+      path("django-admin/", admin.site.urls),
+      path("admin/", include(oauth2_urls)),
+      path("admin/", include(wagtailadmin_urls)),
+      path("documents/", include(wagtaildocs_urls)),
+      path("search/", search_views.search, name="search"),
+   ]
