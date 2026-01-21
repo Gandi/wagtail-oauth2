@@ -1,3 +1,7 @@
+2.0.6 - Released on 2026-01-21
+------------------------------
+* Lets do http on localhost IPs too. 
+
 2.0.5 - Released on 2026-01-19
 ------------------------------
 * Fix 404 error on documentation badge.
