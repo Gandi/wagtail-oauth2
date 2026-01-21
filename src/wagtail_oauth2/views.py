@@ -110,7 +110,17 @@ class Oauth2LoginView(LoginView):
         log.info("Redirect to the oauth2 authorization server")
         host = request.get_host()
         # XXX request.scheme does not works properly, maybe a config issue
-        scheme = "http" if host.startswith("localhost:") else "https"
+        scheme = (
+            "http"
+            if any(
+                [
+                    host.startswith("localhost:"),
+                    host.startswith("127.0.0.1:"),
+                    host.startswith("[::1]:"),
+                ]
+            )
+            else "https"
+        )
         url = Token.get_authenticated_url(
             scheme + "://" + host + reverse("wagtailadmin_login"),
             state,
