@@ -21,7 +21,7 @@ class Token:
         "Retrieve Tokens from an authorization code."
         try:
             token_url = get_setting("TOKEN_URL")
-            log.info(f"Fetching token on {token_url}/token")
+            log.info("Fetching token on %s", token_url)
             response = requests.post(
                 token_url,
                 data={
