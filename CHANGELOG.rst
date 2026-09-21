@@ -1,3 +1,7 @@
+2.1.0 - Released on 2026-09-21
+------------------------------
+* Upgrade wagtail and django. 
+
 2.0.6 - Released on 2026-01-21
 ------------------------------
 * Lets do http on localhost IPs too. 
