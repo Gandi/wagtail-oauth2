@@ -2,9 +2,9 @@
 
 from django.conf import settings
 
-global_prefix = "OAUTH2_"
+GLOBAL_PREFIX = "OAUTH2_"
 
 
 def get_setting(name, default=None):
     """Get the settings without the prefix."""
-    return getattr(settings, global_prefix + name, default)
+    return getattr(settings, GLOBAL_PREFIX + name, default)

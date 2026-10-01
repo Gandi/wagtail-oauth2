@@ -1,14 +1,20 @@
+import logging
 import time
 from typing import cast
 
 from .resources import Token
-from .settings import get_setting
+from .settings import GLOBAL_PREFIX, get_setting
+
+log = logging.getLogger(__name__)
 
 DEFAULT_SESSION_KEY_PREFIX = "wagtail_oauth2_"
 
 
 def save_tokens(request, tokens):
     if not get_setting("STORE_TOKENS", False):
+        log.warning(
+            f"{GLOBAL_PREFIX}_STORE_TOKENS is not set to true, cannot retrieve token"
+        )
         return None
     prefix = get_setting("SESSION_KEY_PREFIX", DEFAULT_SESSION_KEY_PREFIX)
     request.session[f"{prefix}access_token"] = tokens["access_token"]
@@ -22,9 +28,12 @@ def save_tokens(request, tokens):
         )
 
 
-def get_access_token(request):
+def get_access_token(request) -> str | None:
     """Get the access token, or fetch a new one if it is possible, otherwise return None."""
     if not get_setting("STORE_TOKENS", False):
+        log.warning(
+            f"{GLOBAL_PREFIX}_STORE_TOKENS is not set to true, cannot retrieve token"
+        )
         return None
 
     prefix = get_setting("SESSION_KEY_PREFIX", DEFAULT_SESSION_KEY_PREFIX)
@@ -36,7 +45,9 @@ def get_access_token(request):
         return access_token
 
     if refresh_token:
+        log.info("Refreshing token")
         tokens = Token.by_refresh_token(refresh_token)
         if tokens:
             save_tokens(request, tokens)
+            log.info("Getting the new token %s***", access_token[:6])
             return tokens["access_token"]
