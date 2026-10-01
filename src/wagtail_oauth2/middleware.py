@@ -2,6 +2,7 @@ import logging
 
 import requests
 from django.conf import settings
+from django.http import HttpResponse
 from django.http.request import HttpRequest
 from django.shortcuts import redirect
 
@@ -33,6 +34,11 @@ class KeepAliveMiddleware:
                 )
                 response.raise_for_status()
             except Exception:
+                if request.headers.get("HX-Request"):
+                    return HttpResponse(
+                        b"HX-Redirect: {login_url}",
+                        headers={"HX-Redirect": login_url},
+                    )
                 return redirect(login_url)
 
         return self.get_response(request)
