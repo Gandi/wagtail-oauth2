@@ -1,3 +1,7 @@
+2.2.1 - Released on 2026-10-02
+------------------------------
+* Validate oauth2 tokens only on /admin routes.
+
 2.2.0 - Released on 2026-10-02
 ------------------------------
 * Implement a middleware to ensure oauth2 access tokens
