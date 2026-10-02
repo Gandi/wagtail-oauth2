@@ -1,6 +1,6 @@
 import logging
 import time
-from typing import cast
+from typing import Optional, cast
 
 from .resources import Token
 from .settings import GLOBAL_PREFIX, get_setting
@@ -28,7 +28,7 @@ def save_tokens(request, tokens):
         )
 
 
-def get_access_token(request) -> str | None:
+def get_access_token(request) -> Optional[str]:
     """Get the access token, or fetch a new one if it is possible, otherwise return None."""
     if not get_setting("STORE_TOKENS", False):
         log.warning(
