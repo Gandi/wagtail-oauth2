@@ -22,9 +22,9 @@ class KeepAliveMiddleware:
         if request.path == "/admin/login/":
             return self.get_response(request)
 
-        url = get_setting("USERINFO_URL", "")
+        url = get_setting("TOKENINFO_URL", "") or get_setting("USERINFO_URL", "")
         if not url:
-            log.error(f"Missing setting {GLOBAL_PREFIX}_USERINFO_URL")
+            log.error(f"Missing setting {GLOBAL_PREFIX}_TOKENINFO_URL")
         else:
             access_token = get_access_token(request)
             try:
