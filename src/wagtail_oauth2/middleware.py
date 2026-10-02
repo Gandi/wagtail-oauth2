@@ -17,9 +17,9 @@ class KeepAliveMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest):
-
+        # XXX all those path should not be hard coded
         login_url = f"{settings.WAGTAILADMIN_BASE_URL}/admin/login/"
-        if request.path == "/admin/login/":
+        if request.path == "/admin/login/" or not request.path.startswith("/admin/"):
             return self.get_response(request)
 
         url = get_setting("TOKENINFO_URL", "") or get_setting("USERINFO_URL", "")
