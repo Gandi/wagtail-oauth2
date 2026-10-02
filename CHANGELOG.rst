@@ -1,3 +1,8 @@
+2.2.0 - Released on 2026-10-02
+------------------------------
+* Implement a middleware to ensure oauth2 access tokens
+  are still valid. 
+
 2.1.0 - Released on 2026-09-21
 ------------------------------
 * Upgrade wagtail and django. 
